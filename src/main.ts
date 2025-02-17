@@ -1,6 +1,25 @@
+import { Component } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { provideRouter } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
+import { routes } from './app/app.routes';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+@Component({
+  selector: 'app-root',
+  template: `
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  `,
+  standalone: true,
+  imports: [RouterOutlet]
+})
+export class App {
+  name = 'Angular';
+}
+
+bootstrapApplication(App, {
+  providers: [
+    provideRouter(routes)
+  ]
+});
